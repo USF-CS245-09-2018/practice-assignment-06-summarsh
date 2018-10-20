@@ -27,7 +27,7 @@ public class Practice06Test {
 		clearData();
 		for (int i = 0; i < item.length(); i++) {
 			String itemStr = item.substring(i, i+1);
-			if(! itemStr.equals(" ")) { //don't include empty spaces
+			if(! itemStr.equals(" ") && ! itemStr.equals("!")) { //don't include empty spaces
 				String lowerCaseStr = itemStr.toLowerCase();
 				stack.push(lowerCaseStr);
 				queue.enqueue(lowerCaseStr);

@@ -2,28 +2,45 @@ import java.util.*;
 
 public class ArrayStack implements Stack {
 
-	protected int top = -1;
-	protected Object[] arr = new Object[10];
+	protected int top;
+	protected Object[] arr;
+
+	public ArrayStack() {
+		top = -1;
+		arr = new Object[10];
+	}
 
 	public void push(Object obj){
-		arr[++top] = obj;
+		if(top == arr.length-1) {
+			grow_array();
+		}
+		++top;
+		arr[top] = obj;
 	}
 
 	public Object pop(){
 		if(empty()){
-			throw new EmptyStackException();
+			throw new IllegalStateException("Empty stack.");
 		}
 		return arr[top--];
 	}
 
-	public boolean empty() {
-		if(arr[top] == null) {
-			return true;
+	public void grow_array() {
+		Object[] newArr = new Object[arr.length*2];
+		for(int i=0; i<arr.length; i++){
+			newArr[i] = arr[i];
 		}
-		return false;
+		arr = newArr;
+	}
+
+	public boolean empty() {
+		return top == -1;
 	}
 
 	public Object peek(){
+		if(empty()){
+			throw new IllegalStateException("Empty stack.");
+		}
 		return arr[top];
 	}
 }
