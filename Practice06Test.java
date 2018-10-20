@@ -22,13 +22,16 @@ public class Practice06Test {
 			stack.pop();
 		}
 	}
-	
-	
+
 	public boolean isPalindrome(String item) {
 		clearData();
 		for (int i = 0; i < item.length(); i++) {
-			stack.push(item.substring(i, i+1));
-			queue.enqueue(item.substring(i, i+1));
+			String itemStr = item.substring(i, i+1);
+			if(! itemStr.equals(" ")) { //don't include empty spaces
+				String lowerCaseStr = itemStr.toLowerCase();
+				stack.push(lowerCaseStr);
+				queue.enqueue(lowerCaseStr);
+			}
 		}
 
 		while (! stack.empty() && ! queue.empty()) {
